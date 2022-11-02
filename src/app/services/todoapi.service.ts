@@ -13,10 +13,12 @@ export class TodoapiService {
     return this.h.get(`${this.url}/todos`);
   }
 
-  addToTodo(addtask: any) {
+  addToTodo(addtask:any) {
     console.log(addtask);
+    
+    
 
-    return this.h.post(`${this.url}/todos/add`, addtask);
+    return this.h.post(`${this.url}/todos/add`,addtask);
   }
 
   updaateTodo(todoId:string,data:any){

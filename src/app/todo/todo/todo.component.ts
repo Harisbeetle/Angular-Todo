@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DeleteTask, Itask, Todo, TodoRes } from 'src/app/Model/tasks';
 import { TodoapiService } from 'src/app/services/todoapi.service';
-import { collapseTextChangeRangesAcrossMultipleVersions } from 'typescript';
+
 @Component({
   selector: 'app-todo',
   templateUrl: './todo.component.html',
@@ -27,14 +27,15 @@ export class TodoComponent implements OnInit {
   data: any;
   delId: any;
 
+  addValues: any;
+
   constructor(public fb: FormBuilder, public ser: TodoapiService) {}
 
   ngOnInit(): void {
     this.todform = this.fb.group({
       todo: ['', Validators.required],
-      completed: [],
-      userId: [],
-      id: [],
+      completed: [false],
+      userId: [5],
     });
     this.displayAllTodo();
   }
@@ -63,8 +64,14 @@ export class TodoComponent implements OnInit {
   }
 
   addtaskTotodo() {
-    const taskInputText = this.todform.value;
-    this.ser.addToTodo(taskInputText).subscribe((res: any) => {
+    console.log('djds', this.todform.value);
+
+    this.todform = this.fb.group({
+      ...this.todform.value,
+      userId: [5],
+    });
+    this.ser.addToTodo(this.todform.value).subscribe((res: any) => {
+      console.log(res);
       this.tasks.push(res);
     });
     this.todform.reset();
@@ -97,7 +104,7 @@ export class TodoComponent implements OnInit {
       console.log(res);
       //  this.index = this.tasks.findIndex((obj) => obj.id == delId);
       this.tasks.splice(this.index, 1);
-        this.inprogress.splice(this.index, 1);
+      this.inprogress.splice(this.index, 1);
     });
   }
 }

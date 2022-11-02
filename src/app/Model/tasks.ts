@@ -5,7 +5,7 @@ export interface Itask {
 
 export interface Todo {
   completed: boolean;
-  id: string;
+  id: any;
   todo: string;
   userId: number;
 }
@@ -18,7 +18,7 @@ export interface TodoRes {
 }
 
 export interface EditTodo {
-  id: string;
+  id: any;
   todo: string;
   userId: number;
   completed: boolean;
@@ -34,7 +34,7 @@ export interface DeleteTask {
 
   completed:boolean
   deletedOn:string
-  id:number
+  id:any
   isDeleted:boolean
   userId:number
   todo:string 
